@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>bls</title>
+    <script>
+        // Function to save the text input to local storage
+        function saveToStorage() {
+            let inputValue = document.getElementById('inputText').value;
+            // Save the value to local storage
+            localStorage.setItem('storedValue', inputValue);
+        }
+
+        // Function to update the element with id 'should_run' every 5 seconds
+        function updateElement() {
+            let storedValue = localStorage.getItem('storedValue');
+            if (storedValue) {
+                document.getElementById('should_run').textContent = storedValue;
+            } else {
+                document.getElementById('should_run').textContent = "Yes";
+            }
+        }
+
+        // Start updating the value every 5 seconds
+        window.onload = function () {
+            // Update immediately on page load
+            updateElement();
+            // Update every 5 seconds
+            setInterval(updateElement, 5000);
+        };
+    </script>
+</head>
+<body>
+    <h1>Text Storage Page</h1>
+    <div>
+        <label for="inputText">Enter something: </label>
+        <input type="text" id="inputText">
+        <button onclick="saveToStorage()">Save</button>
+    </div>
+    <br>
+    <div>
+        <p>Current stored value (updates every 5 seconds):</p>
+        <p id="should_run">Yes</p>
+    </div>
+</body>
+</html>
